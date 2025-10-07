@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    tools {
+        maven 'MAVEN_HOME'
+    }
+    stages {
+        stage('Clean') {
+            steps {
+                // Just clean the project, no manual git clone needed
+                bat "git clone https://github.com/azeemafirdouss/java_maven"
+                bat 'mvn clean  java_maven/pom.xml'
+                
+            }
+        }
+        stage('Install') {
+            steps {
+                bat 'mvn install -f java_maven/pom.xml'
+            }
+        }
+        stage('Test') {
+            steps {
+                bat 'mvn test -f java_maven/pom.xml'
+            }
+        }
+        stage('Package') {
+            steps {
+                bat 'mvn package -f java_maven/pom.xml'
+            }
+        }
+    }
+   
+    
+}
