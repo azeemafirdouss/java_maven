@@ -8,7 +8,7 @@ pipeline {
         stage('git repo & clean') {
             steps {
                 //bat "rmdir  /s /q mavenjava"
-                bat "git clone https://github.com/azeemafirdouss/java_maven.gi"
+                bat "git clone https://github.com/azeemafirdouss/java_maven.git"
                 bat "mvn clean -f java_maven"
             }
         }
