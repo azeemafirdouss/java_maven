@@ -7,7 +7,7 @@ pipeline {
         stage('Clean') {
             steps {
                 // Just clean the project, no manual git clone needed
-                bat "git clone https://github.com/azeemafirdouss/java_maven"
+                bat "git clone https://github.com/azeemafirdouss/java_maven.git"
                 bat 'mvn clean -f  java_maven/pom.xml'
                 
             }
