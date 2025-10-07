@@ -1,32 +1,39 @@
-
 pipeline {
     agent any
-    tools{
-        maven 'Maven'
+
+    tools {
+        maven 'Maven'  // Make sure 'Maven' is defined in Jenkins > Global Tool Configuration
     }
+
     stages {
-        stage('git repo & clean') {
+        stage('Clean') {
             steps {
-                //bat "rmdir  /s /q mavenjava"
-                bat "git clone https://github.com/azeemafirdouss/java_maven.git"
-                bat "mvn clean -f java_maven"
+                bat "mvn clean"
             }
         }
-        stage('install') {
+
+        stage('Install') {
             steps {
-                bat "mvn install -f java_maven/pom.xml" 
+                bat "mvn install"
             }
         }
-        stage('test') {
+
+        stage('Test') {
             steps {
-                bat "mvn test -f java_maven/pom.xml"
+                bat "mvn test"
             }
         }
-        stage('package') {
+
+        stage('Package') {
             steps {
-                bat "mvn package -f java_maven/pom.xml"
+                bat "mvn package"
             }
+        }
+    }
+
+    post {
+        always {
+            cleanWs() // Optional: Cleans workspace after build
         }
     }
 }
-
